@@ -1085,4 +1085,4 @@ export class VoiceRole extends Plugin implements IModule<VoiceRole> {
 	}
 }
 
-module.exports = VoiceRole;
+export default VoiceRole;
