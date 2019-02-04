@@ -78,10 +78,10 @@ interface ISpecificRoleRow {
 // }, HELP_CHECKS.default)
 
 export class VoiceRole extends Plugin implements IModule<VoiceRole> {
-	private _flowHandler: IPublicFlowCommand;
-	private _db = getDB();
-	private _verifyInterface?: ModulePublicInterface<Verify>;
+	private readonly _db = getDB();
 	private readonly _log = getLogger("VoiceRole");
+	private _flowHandler: IPublicFlowCommand;
+	private _verifyInterface?: ModulePublicInterface<Verify>;
 
 	constructor() {
 		super({
