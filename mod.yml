@@ -1,6 +1,6 @@
 name: voice-role
-version: 1.6.8
+version: 1.6.9
 dependencies:
   messages-flows: ^0.9.0
-  verify: ^0.0.1?
+  verify: 0.0.x?
 main: ./voiceRole
