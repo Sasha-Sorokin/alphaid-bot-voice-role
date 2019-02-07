@@ -82,6 +82,7 @@ export class VoiceRole extends Plugin implements IModule<VoiceRole> {
 	private readonly _log = getLogger("VoiceRole");
 	private _flowHandler: IPublicFlowCommand;
 	private _verifyInterface?: ModulePublicInterface<Verify>;
+	private _verifyVerifiedHandler?: () => void;
 
 	constructor() {
 		super({
@@ -163,6 +164,12 @@ export class VoiceRole extends Plugin implements IModule<VoiceRole> {
 			this._log("warn", "`Verify` dependency not found. It helps to prevent non-verified members to gain a role and make malicious actions");
 		} else {
 			this._verifyInterface = verifyInterface;
+
+			this._verifyInterface.onInit(verify => {
+				this._verifyVerifiedHandler = verify.onVerified(
+					(member) => this._onVCUpdated(member.voice, member.voice)
+				);
+			});
 		}
 
 		this._handleEvents();
@@ -179,7 +186,7 @@ export class VoiceRole extends Plugin implements IModule<VoiceRole> {
 			await this._doCleanup(guild);
 		}
 
-		this._log("ok", "'VoiceRole' plugin loaded and ready to work");
+		this._log("ok", "VoiceRole plugin initialized and ready to work!");
 	}
 
 	private async _createTable() {
