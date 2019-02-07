@@ -1085,6 +1085,7 @@ export class VoiceRole extends Plugin implements IModule<VoiceRole> {
 
 	@unloadMethod
 	public async unload() {
+		this._verifyVerifiedHandler && this._verifyVerifiedHandler();
 		this._flowHandler && this._flowHandler.unhandle();
 		this._unhandleEvents();
 
